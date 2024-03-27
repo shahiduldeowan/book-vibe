@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: #23be0a;
+  --secondary-color: #59c6d2;
+  --transparent-color: #00ffffff;
+}
+
 .font-playfair-display {
   font-family: "Playfair Display", serif;
   font-optical-sizing: auto;
