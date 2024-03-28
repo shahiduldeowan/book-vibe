@@ -9,7 +9,7 @@ const MainLayout = () => {
         <Navbar />
       </div>
       <Outlet />
-      <ToastContainer position="top-right" />
+      <ToastContainer position="top-right" closeOnClick />
     </>
   );
 };
