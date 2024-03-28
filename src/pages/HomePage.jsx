@@ -6,7 +6,6 @@ const HomePage = () => {
     <div>
       <BannerSection />
       <BooksSection />
-      <h1>Home page</h1>
     </div>
   );
 };
