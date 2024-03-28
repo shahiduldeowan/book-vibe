@@ -52,10 +52,12 @@ export const router = createBrowserRouter([
       {
         path: "/best-seller",
         element: <BestSellerPage />,
+        loader: () => fetch(`books.json`),
       },
       {
         path: "/search",
         element: <SearchPage />,
+        loader: () => fetch(`books.json`),
       },
     ],
   },
