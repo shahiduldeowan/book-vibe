@@ -7,6 +7,7 @@ import FilledButton from "../components/Button/FilledButton";
 import Loader from "../components/Loader/Loader";
 import SectionTitle from "../components/SectionTitle/SectionTitle";
 import TagItem from "../components/Tag/TagItem";
+import { storedReadBooks, storedWishlistBooks } from "../utils";
 
 const BookDetailsPage = () => {
   const [book, setBook] = useState({});
@@ -25,6 +26,7 @@ const BookDetailsPage = () => {
     totalPages,
     publisher,
     yearOfPublishing,
+    bookId,
   } = book;
 
   useEffect(() => {
@@ -34,10 +36,21 @@ const BookDetailsPage = () => {
   }, [bookDetailsLoaded, params]);
 
   const handleRead = () => {
-    toast("Read");
+    const storedBooks = storedReadBooks(bookId);
+    if (storedBooks.status) {
+      toast.success(storedBooks.message);
+    } else {
+      toast.warn(storedBooks.message);
+    }
   };
+
   const handleWishlist = () => {
-    toast.warn("Wishlist");
+    const storedBooks = storedWishlistBooks(bookId);
+    if (storedBooks.status) {
+      toast.success(storedBooks.message);
+    } else {
+      toast.warn(storedBooks.message);
+    }
   };
 
   if (navigation.state === "loading") {
