@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import StarIcon from "../../assets/star.svg";
 import TagItem from "../Tag/TagItem";
 
-const BookGridItemCard = ({ book }) => {
+const BookGridItemCard = ({ book, index }) => {
   const { bookName, author, image, tags, category, rating, bookId } = book;
   const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ const BookGridItemCard = ({ book }) => {
   return (
     <div
       onClick={handleCardItem}
-      className="border border-[#13131326] rounded-2xl p-6 cursor-pointer transform duration-300 ease-in-out hover:scale-105"
+      className="relative border border-[#13131326] rounded-2xl p-6 cursor-pointer transform duration-300 ease-in-out hover:scale-105"
     >
       <div className="w-full h-56 bg-[#F3F3F3] rounded-2xl mb-6">
         <img
@@ -38,12 +38,23 @@ const BookGridItemCard = ({ book }) => {
           <img src={StarIcon} alt="Star Icon" />
         </div>
       </div>
+      {book.sold && (
+        <div className="badge badge-outline my-3 border-[#23BE0A] text-[#23BE0A]">
+          Over {book.sold} copies sold!
+        </div>
+      )}
+      {index && (
+        <span className="absolute top-4 left-4 indicator-item badge badge-primary bg-[#23BE0A] border-[#23BE0A] text-white">
+          #{index}
+        </span>
+      )}
     </div>
   );
 };
 
 BookGridItemCard.propTypes = {
   book: PropTypes.object.isRequired,
+  index: PropTypes.number,
 };
 
 export default BookGridItemCard;
