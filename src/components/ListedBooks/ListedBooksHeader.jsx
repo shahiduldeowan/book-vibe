@@ -1,6 +1,6 @@
 import SectionTitle from "../SectionTitle/SectionTitle";
 
-const ListedBookHeader = () => {
+const ListedBooksHeader = () => {
   return (
     <div>
       <SectionTitle title={"Books"} />
@@ -8,4 +8,4 @@ const ListedBookHeader = () => {
   );
 };
 
-export default ListedBookHeader;
+export default ListedBooksHeader;
