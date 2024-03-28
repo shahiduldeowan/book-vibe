@@ -1,8 +1,11 @@
+import ListedBooksHeader from "../components/ListedBooks/ListedBooksHeader";
+
 const ListedBooksPage = () => {
   return (
-    <div>
+    <>
+      <ListedBooksHeader />
       <h1>Listed Books Page</h1>
-    </div>
+    </>
   );
 };
 
