@@ -3,12 +3,13 @@ import { useLoaderData } from "react-router-dom";
 import ListedBooksHeader from "../components/ListedBooks/ListedBooksHeader";
 import ListedBooksTab from "../components/ListedBooks/ListedBooksTab";
 import SortedBooksDropdown from "../components/ListedBooks/SortedBooksDropdown";
+import { getReadBooks, getWishlistBooks } from "../utils";
 
 export const SortedBooksContext = createContext([]);
+export const SelectedCategoryContext = createContext("");
 
 const ListedBooksPage = () => {
   const [sortedBooks, setSortedBooks] = useState([]);
-  const [dropdownValues, setDropdownValues] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const loadedBooks = useLoaderData();
@@ -18,30 +19,33 @@ const ListedBooksPage = () => {
   };
 
   useEffect(() => {
-    setDropdownValues(loadedBooks.map((book) => book.category));
-    if (selectedCategory) {
-      const myBooks = loadedBooks.filter(
-        (book) => book.category === selectedCategory
-      );
+    const storedBooksId = [...getReadBooks(), ...getWishlistBooks()];
+    if (!storedBooksId) {
+      setSortedBooks([]);
+    } else {
+      const myBooks = loadedBooks.filter((book) => {
+        return storedBooksId.find((item) => item === book.bookId);
+      });
       if (myBooks && myBooks.length > 0) {
         setSortedBooks(myBooks);
+      } else {
+        setSortedBooks([]);
       }
-    } else {
-      setSortedBooks(loadedBooks);
     }
   }, [loadedBooks, selectedCategory]);
 
   return (
     <>
       <ListedBooksHeader />
-
       <SortedBooksDropdown
         selectedCategory={selectedCategory}
         handleSelectedCategory={handleSelectedCategory}
-        dropdownValues={dropdownValues}
+        dropdownValues={["Rating", "Number of pages", "Publisher year"]}
       />
       <SortedBooksContext.Provider value={sortedBooks}>
-        <ListedBooksTab />
+        <SelectedCategoryContext.Provider value={selectedCategory}>
+          <ListedBooksTab />
+        </SelectedCategoryContext.Provider>
       </SortedBooksContext.Provider>
     </>
   );
