@@ -26,10 +26,16 @@ const storedReadBooks = (id) => {
   if (!isExist) {
     storedReadBooks.push(id);
     localStorage.setItem('readBooks', JSON.stringify(storedReadBooks));
-    return 'Successfully read this book';
+    return {
+      status:true,
+      message:'Successfully read this book'
+    };
   }
 
-  return 'You have already read this book';
+  return {
+    status:false,
+    message:'You have already read this book'
+  };
 };
 
 const storedWishlistBooks = (id) => {
@@ -38,16 +44,25 @@ const storedWishlistBooks = (id) => {
   const isExistReadBooks = storedReadBooks.find(bookId => bookId === id);
   const isExistWishlistBooks = storedWishlistBooks.find(bookId => bookId === id);
   if(isExistReadBooks) {
-    return 'You have already read this book';
+    return {
+      status:false,
+      message:'You have already read this book'
+    };
   }
   if(isExistWishlistBooks){
-    return 'You have already added this book to wishlist';
+    return {
+      status:false,
+      message:'You have already added this book to wishlist'
+    };
   }
   
   storedWishlistBooks.push(id);
   localStorage.setItem('wishlistBooks', JSON.stringify(storedWishlistBooks));
 
-  return 'Successfully added this book to wishlist';
+  return {
+    status: true,
+    message:'Successfully added this book to wishlist'
+  };
 };
 
 export {
