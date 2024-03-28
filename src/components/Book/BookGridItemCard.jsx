@@ -8,7 +8,7 @@ const BookGridItemCard = ({ book }) => {
   const navigate = useNavigate();
 
   const handleCardItem = () => {
-    navigate(`/book-details/${bookId}`);
+    navigate(`/${bookId}`);
   };
 
   return (
