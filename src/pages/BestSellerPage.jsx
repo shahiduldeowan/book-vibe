@@ -19,8 +19,6 @@ const BestSellerPage = () => {
     setBestSellerBooks(myBooks);
   }, [books]);
 
-  console.log("bestSellerBooks :>> ", bestSellerBooks);
-
   if (navigation.state === "loading") {
     return <Loader />;
   }
